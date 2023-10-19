@@ -131,7 +131,7 @@ static const uint8_t _hidReportDescriptor[] = {
   END_COLLECTION(0)          // END_COLLECTION
 };
 
-BleComboKeyboard::BleComboKeyboard(std::string deviceName, std::string deviceManufacturer, uint8_t batteryLevel) : hid(0)
+BleComboKeyboard::BleComboKeyboard(const std::string& deviceName, const std::string& deviceManufacturer, uint8_t batteryLevel) : hid(0)
 {
   this->deviceName = deviceName;
   this->deviceManufacturer = deviceManufacturer;
@@ -160,7 +160,7 @@ void BleComboKeyboard::setBatteryLevel(uint8_t level) {
 
 void BleComboKeyboard::taskServer(void* pvParameter) {
   BleComboKeyboard* bleKeyboardInstance = (BleComboKeyboard *) pvParameter; //static_cast<BleComboKeyboard *>(pvParameter);
-  BLEDevice::init(bleKeyboardInstance->deviceName);
+  BLEDevice::init(bleKeyboardInstance->deviceName.c_str());
   BLEServer *pServer = BLEDevice::createServer();
   pServer->setCallbacks(bleKeyboardInstance->connectionStatus);
 
@@ -178,7 +178,7 @@ void BleComboKeyboard::taskServer(void* pvParameter) {
  
   bleKeyboardInstance->outputKeyboard->setCallbacks(new KeyboardOutputCallbacks());
 
-  bleKeyboardInstance->hid->manufacturer()->setValue(bleKeyboardInstance->deviceManufacturer);
+  bleKeyboardInstance->hid->manufacturer()->setValue(bleKeyboardInstance->deviceManufacturer.c_str());
 
   bleKeyboardInstance->hid->pnp(0x02, 0xe502, 0xa111, 0x0210);
   bleKeyboardInstance->hid->hidInfo(0x00,0x01);
@@ -504,4 +504,3 @@ size_t BleComboKeyboard::write(const uint8_t *buffer, size_t size) {
 	}
 	return n;
 }
-
