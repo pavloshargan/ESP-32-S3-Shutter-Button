@@ -7,6 +7,7 @@
 #include "BLEHIDDevice.h"
 #include "BLECharacteristic.h"
 #include "Print.h"
+#include <string> // Add this line for std::string
 
 
 const uint8_t KEY_LEFT_CTRL = 0x80;
@@ -100,7 +101,7 @@ private:
   static void taskServer(void* pvParameter);
 
 public:
-  BleComboKeyboard(std::string deviceName = "BlynkGO Keyboard/Mouse", std::string deviceManufacturer = "BlynkGO Solution", uint8_t batteryLevel = 100);
+  BleComboKeyboard(const std::string& deviceName = "ESP32KeyboardMouse", const std::string& deviceManufacturer = "BlynkGo", uint8_t batteryLevel = 100);
   void begin(void);
   void end(void);
   void sendReport(KeyReport* keys);
