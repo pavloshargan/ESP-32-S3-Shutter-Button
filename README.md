@@ -1,8 +1,8 @@
 # ESP32 S3 Shutter button for IOS/Android
 
-Control your Phone camera app via ESP32 S3 XIAO board
+Control your Phone camera app via ESP32 S3 XIAO board <br>
 The ESP is connected to the phone as bluetooth keybpard+mouse. If you press boot button on the ESP, the volume up keystroke is sent to the phone and the camera is triggered.
-
+<>br
 You can also initiate the recording through the USB serial by sending "up" command
 
 # Step by step usage Guide
